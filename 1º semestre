@@ -1,0 +1,140 @@
+1. Escreva um programa que, com base em uma temperatura em graus celsius, a converta e exiba em Kelvin (K), Réaumur (Re), Rankine (Ra) e Fahrenheit (F), seguindo as fórmulas: F = C * 1.8 + 32; K = C + 273.15; Re = C * 0.8; Ra = C * 1.8 + 32 + 459.67
+
+Antes de ver a resolução do exercício, tente fazer sozinho e depois compare com minha versão, pois não se aprende a programar copiando códigos! Vamos começar declarando todas as variáveis que vamos utilizar como double, que são: C, K, F, Re e Ra. Para fazer os cálculos, vamos considerar a temperatura em Celsius como 2.43 (mas pode ser qualquer valor que você desejar). Em seguida, vamos calcular as fórmulas das respectivas temperaturas, conforme dito no enunciado. Por fim, baste exibir os dados, vamos utilizar o System.out.println para exibir uma mensagem personalizada e a respectiva temperatura calculada.
+package exercicios;
+
+public class Temperatura {
+    public static void main(String[] args) {
+        double C, K, F, Re, Ra;
+        C = 2.43;
+
+        F = C * 1.8 + 32;
+        K = C + 273.15;
+        Ra = C * 1.8 + 32 + 459.67;
+        Re = C * 0.8;
+
+        System.out.println("A temperatura em Fahrenheit é: " + F);
+        System.out.println("A temperatura em Kelvin é: " + K);
+        System.out.println("A temperatura em Reaumur é: " + Ra);
+        System.out.println("A temperatura em Rankine é: " + Re);
+    }
+}
+2. Tem-se um conjunto de dados contendo a altura e o sexo (masculino, feminino) de 10 pessoas. Fazer um algoritmo que calcule e escreva:
+a. a maior e a menor altura do grupo;
+b. média de altura dos homens;
+c. o número de mulheres.
+
+A resolução deste exercício é um pouco mais difícil que os demais dessa lista, pois envolve mais lógica e o uso de laços de repetição mas, não deixe de tentar fazer também! Vamos a resolução. Vamos declarar as variável inteiras sexo, qtMulheres e qtHomens e as variáveis do tipo float como altura, soma, mediaHomens, maior e menor; a maioria dessas variáveis precisam ser inicializadas com o valor de 0, pois elas serão utilizadas para realizar teste lógicos e operações matemáticas. Para a entrada de dados, vamos chamar a classe Scanner (e importa-la) colocando o nome de entrada, por questões de segurança, vamos fechar este campo de entrada já no final do código com o comando entrada.close(). Agora começaremos a lógica do exercício propriamente dito.
+
+Vamos criar um laço de repetição(for) com 10 voltas que irá armazenar a altura e sexo digitados pelo usuário. Para facilitar, criei uma mensagem pedindo o sexo (1-Mulher e 2-Homem) para evitar utilizar String e métodos para validar textos. Em seguida, chamamos a classe entrada para receber este valor, armazenando na variável sexo. Pedimos agora para inserir a altura, recebemos este valor e armazenamos na variável altura. Para verificar se o sexo foi de Homem ou Mulher, implementaremos um condicional if testando os valor para 1, para 2 e para 3 (exibindo mensagem de número inválido). Caso o sexo seja 1 (mulher), vamos atribuir um valor de +1 na variável que conta o número de mulheres (qtMulheres) através do operador ++. Caso seja homem, também atribuímos ++ para a variável (qtHomens), pois precisaremos dela na hora de calcular a média da altura dos homens, e guardamos o valor da altura na variável da somaH (que chama ela mesma somada com a altura do homem).
+
+Agora, vamos criar mais um condicional if para verificar qual é a maior e menor altura, para isso, basta comparar se a altura digitada é maior que o valor da variável maior e, se for verdade, essa variável passará a ter o valor da altura digitada. Para saber a menor altura, a lógica é o mesmo, se a altura atual for menor que a variável menor, ela passará a ocupar o valor da variável. Agora finalizamos todas as operações do laço for, vamos calcular a média das alturas dos homens, dividindo a soma das alturas pela quantidade de homens. Por fim, é só nós exibirmos todos os valores encontrados na tela e terminamos nosso exercício.
+CORREÇÃO: cometi um erro na declaração do valor da variável menor, como ela é igual a 0, nenhuma altura digitada vai substituir ela, pois não há altura negativa. Para corrigir, troque o valor da inicialização por 10. Vai ficar assim: menor=10;
+
+package artigosExercicios;
+
+import java.util.Scanner;
+
+public class HomensMulheres {
+    public static void main(String[] args) {
+        int sexo, qtMulheres=0, qtHomens=0;
+        float altura, somaH=0, mediaHomens=0, maior=0, menor=0;
+
+        Scanner entrada = new Scanner(System.in);
+
+        for (int i=0; i<10; i++) {
+            System.out.print("Escolha o sexo da pessoa (1-Mulher, 2-Homem): ");
+            sexo = entrada.nextInt();
+            System.out.print("Digite a altura: ");
+            altura = entrada.nextFloat();
+            if (sexo == 1) {
+                qtMulheres++;
+            } else if (sexo == 2) {
+                qtHomens++;
+                somaH = somaH + altura;
+            } else {
+                System.out.println("Opção sexo inválido!");
+            }
+            if (altura > maior) {
+                 maior = altura;
+            } else if (altura < menor){
+                menor = altura;
+            }
+        }
+        mediaHomens = somaH / qtHomens;
+
+        System.out.println("A maior altura do grupo é de " + maior + " m, e a menor é de " + menor + " m");
+        System.out.println("A média de altura dos homens é " + mediaHomens + " m");
+        System.out.println("O número de mulheres é " + qtMulheres);
+
+        entrada.close();
+    }
+}
+3. Criar um programa que calcule a média de salários de uma empresa, pedindo ao usuário a grade de funcionários e os salários, e devolvendo a média salarial.
+
+Vamos declarar as variáveis de quatro salários dos funcionários e da média como double e definir alguns valores para cada um dos salários. Em seguida, vamos calcular a média dos mesmos, para isso, basta somar todos os salários e dividir pela quantidade de funcionários (que serão 4). Para finalizar, é só exibir a média na tela!
+package artigosExercicios;
+
+public class MediaSalario {
+    public static void main(String[] args) {
+        double n1, n2, n3, n4, media;
+
+        n1 = 3453.21;
+        n2 = 3498.43;
+        n3 = 7902.09;
+        n4 = 12932.00;
+
+        media = (n1 + n2 + n3 + n4) / 4;
+        System.out.println("A média salarial da empresa é de R$ " + media);
+    }
+}
+4. Uma parede em formato retangular, cuja altura é hp (altura da parede) e a largura lp (largura da parede) precisa ser coberta por azulejos também retangulares. O azulejo retangular tem dimensões ha (altura do azulejo) e la (largura do azulejo). Escreva um programa que leia as quatro medidas hp, lp, ha e la, calcule e imprima quanto azulejos com as medidas dadas são necessários para cobrir a parede dada.
+
+Começamos declarando as variáveis como double: hp, lp, ha, la e qtd. Vamos colocar alguns valores para a dimensão da parede e do azulejo (coloquei a parede como 2.6 x 1.6 e o azulejo como 0.35 x 0.3). Em seguida, vamos calcular a quantidade de azulejos necessários, basta multiplicar as duas dimensões da parede, para descobrir a área, e dividir pela multiplicação das duas dimensões do azulejo. Vai ficar assim: qtd = (hp * lp) / (ha * la). Por fim, é só exibir a quantidade de azulejos que será necessária para cobrir toda a parede.
+package artigosExercicios;
+
+public class Parede {
+    public static void main(String[] args) {
+        double hp, lp, ha, la, qtd;
+
+        hp = 2.6;
+        lp = 1.6;
+        ha = 0.35;
+        la = 0.3;
+
+        qtd = (hp * lp) / (ha * la);
+
+        System.out.println("Quantidade de azulejos necessários para cobrir a parede: " + qtd);     
+    }
+}
+5. Calcular e apresentar o valor do volume de uma lata de óleo, utilizando fórmula: V = 3.14159 * R * R * A, em que as variáveis: V, R e A representam respectivamente o volume, o raio e a altura.
+Vamos declarar as variáveis V, R e A como double e definir um valor qualquer para as variáveis de altura e de raio. Agora vamos escrever a fórmula, conforme dita no enunciado e, em seguida, exibir na tela uma mensagem contendo o resultado do volume encontrado.
+package artigosExercicios;
+
+public class LataOleo {
+    public static void main(String[] args) {
+        double V, R, A;
+        R = 3.2;
+        A = 4.9;
+
+        V = 3.14159 * R * R * A;
+        System.out.println("O volume da lata de óleo é de " + V + " m³");
+    }
+}
+6. Escreva um programa para determinar a quantidade de cavalos necessários para se levantar uma massa de m quilogramas a uma altura de h metros em t segundos. Considere cavalos = (m * h / t) / 745,6999
+
+Para resolver este exercício, vamos declarar nossa variáveis m, h, t e cavalos como double. Como não vamos utilizar o Scanner para entrada de dados, vamos colocar alguns valores aleatórios como massa, altura e tempo. Em seguida, vamos criar a fórmula que irá calcular quantos cavalos são necessários. Cavalos será a massa multiplicada pela atura, multiplicada pelo tempo (em segundos), e tudo isso dividido pela constante 745,699.
+package exerciciosJava;
+
+public class Cavalos {
+    public static void main(String[] args) {
+        double m, h, t, cavalos;
+        m = 21;
+        h = 2.2;
+        t = 1.4;
+
+        cavalos = (m * h / t) / 745.6999;
+
+        System.out.println("A quantidade de cavalos necessários é " + cavalos);
+    }
+}
